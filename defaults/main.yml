@@ -1,0 +1,8 @@
+---
+ucarp_config:
+  - vip: "10.64.33.200"
+    instance: 1
+    passwd: "ucarppass"
+    interface: "ens3"
+    skew: 50
+    master: true

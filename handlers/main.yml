@@ -1,0 +1,6 @@
+---
+- name: restart ucarp
+  systemd:
+    name: ucarp
+    daemon_reload: true
+    state: restarted

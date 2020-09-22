@@ -1,0 +1,29 @@
+[Unit]
+Description=ucarp daemon.
+After=syslog.target network.target
+StartLimitInterval=0
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/ucarp {% for item in ucarp_config %}
+{% if item.master is defined and item.master|bool %}  -P \
+{% endif %}
+  -z \
+  -k {{ item.skew }} \
+  -i {{ item.interface }} \
+  -v {{ item.instance }} \
+  -p {{ item.passwd }} \
+  -a {{ item.vip }} \
+  -s {{ ansible_default_ipv4.address }} \
+  -n \
+  -u /etc/ucarp/vip-up.sh \
+  -d /etc/ucarp/vip-down.sh
+{% endfor %}
+
+KillMode=control-group
+KillSignal=TERM
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
