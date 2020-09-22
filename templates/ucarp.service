@@ -6,18 +6,18 @@ StartLimitInterval=0
 [Service]
 Type=simple
 ExecStart=/usr/sbin/ucarp {% for item in ucarp_config %}
-{% if item.master is defined and item.master|bool %}  -P \
+{% if item.master is defined and item.master|bool %}  --preempt \
 {% endif %}
-  -z \
-  -k {{ item.skew }} \
-  -i {{ item.interface }} \
-  -v {{ item.instance }} \
-  -p {{ item.passwd }} \
-  -a {{ item.vip }} \
-  -s {{ ansible_default_ipv4.address }} \
-  -n \
-  -u /etc/ucarp/vip-up.sh \
-  -d /etc/ucarp/vip-down.sh
+  --shutdown \
+  --neutral \
+  --advskew {{ item.skew }} \
+  --interface {{ item.interface }} \
+  --vhid {{ item.instance }} \
+  --pass {{ item.passwd }} \
+  --addr {{ item.vip }} \
+  --srcip {{ ansible_default_ipv4.address }} \
+  --upscript /etc/ucarp/vip-up.sh \
+  --downscript /etc/ucarp/vip-down.sh
 {% endfor %}
 
 KillMode=control-group
