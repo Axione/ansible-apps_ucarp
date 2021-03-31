@@ -25,8 +25,8 @@ do
     ${ARPPINGBIN} -I ${iface} -c 10 -q -U ${VIPv4} 1>/dev/null &
 done
 
-{% if ucarp_extra_up_options %}                                                                 
-    {{ ucarp_extra_up_options|indent(4, False) }}
+{% if hostvars[inventory_hostname]['ucarp_up_options.' + item.name]  is defined %} 
+    {{ hostvars[inventory_hostname]['ucarp_up_options.' + item.name]|indent(4, False) }}
 {% endif %}
 
 #Reload service to be sure to be up-to-date

@@ -11,6 +11,6 @@ do
     ${IPBIN} a d ${VIPv4}/32 scope link dev ${iface}
 done
 
-{% if ucarp_extra_down_options %}
-    {{ ucarp_extra_down_options|indent(4, False) }}
+{% if hostvars[inventory_hostname]['ucarp_down_options.' + item.name] is defined %}
+    {{ hostvars[inventory_hostname]['ucarp_down_options.' + item.name] |indent(4, False) }}
 {% endif %}

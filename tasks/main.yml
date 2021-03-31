@@ -63,15 +63,12 @@
 
 - name: "Remember which services need to restart"
   set_fact:
-    restart_services: "{{ restart_services | default([]) + [item.item.name] |unique }}"
+    restart_services: "{{ restart_services | default([]) + [item.item.name] }}"
   when: item.changed
   with_items: 
     - "{{ init.results }}"
     - "{{ upscript.results }}"
     - "{{ downscript.results }}"
 
-- debug:
-    var: restart_services 
-
 #- debug:
-#    var: init.results.item
+#    var: restart_services 
