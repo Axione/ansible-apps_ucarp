@@ -1,8 +1,18 @@
 ---
 ucarp_config:
-  - vip: "10.64.33.200"
+  - name: postgresql
+    vip: "10.64.38.201"
     instance: 1
     passwd: "ucarppass"
     interface: "ens3"
     skew: 50
     master: true
+  - name: elasticsearch
+    vip: "10.64.38.202"
+    instance: 2
+    passwd: "strongpassagain"
+    interface: "ens3"
+    skew: 50
+    master: true
+ucarp_extra_up_options: ""
+ucarp_extra_down_options: ""

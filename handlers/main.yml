@@ -1,6 +1,8 @@
 ---
-- name: restart ucarp
+- name: "restart ucarp"
   systemd:
-    name: ucarp
+    name: "ucarp-{{ item.name }}"
     daemon_reload: true
     state: restarted
+  when: item.name in restart_services | default([])
+  with_items: "{{ ucarp_config }}"

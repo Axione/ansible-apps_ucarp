@@ -1,23 +1,4 @@
 ---
-- name: "Check for ucarp binary"
-  stat:
-    path: "/usr/sbin/ucarp"
-  changed_when: false
-  register: ucarp_binary
-
-- when: not ucarp_binary.stat.exists
-  block:
-    - name: "Install ucarp"
-      package:
-        name: ["ucarp", "iputils-arping"]
-        state: present
-
-    - name: "Create config directory"
-      file:
-        path: /etc/ucarp/
-        state: directory
-        mode: '0755'
-
 - name: "Create init file for ucarp"
   template:
     src: "ucarp.service.j2"
@@ -39,7 +20,6 @@
     - "{{ ucarp_config }}"
   notify:
     - restart ucarp
-
 
 - name: "Copy down scripts"
   template:
@@ -72,6 +52,3 @@
 
 - debug:
     var: restart_services 
-
-#- debug:
-#    var: init.results.item
