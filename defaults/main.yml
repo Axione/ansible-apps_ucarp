@@ -14,5 +14,8 @@ ucarp_config:
     interface: "ens3"
     skew: 50
     master: true
-ucarp_up_options.postgresql: ""
-ucarp_down_options.elasticsearch: ""
+#ucarp_up_options.postgresql: |
+#  test
+#ucarp_down_options.elasticsearch: |
+#  some action
+#  some more
