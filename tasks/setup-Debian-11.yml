@@ -1,0 +1,14 @@
+---
+- name: Install ucarp from deb
+  apt:
+    deb: "{{ item }}"
+  environment:
+    PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  with_items:
+    - "{{ ucarp_deb_pkgs }}"
+
+- name: "Ensure configuration directory exists"
+  file:
+    path: '/etc/ucarp'
+    state: directory
+    mode: '0755'

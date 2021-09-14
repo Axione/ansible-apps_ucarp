@@ -7,9 +7,19 @@
 
 - when: not ucarp_binary.stat.exists
   block:
+    # Special taks for debian-11
+    - include_tasks: setup-Debian-11.yml
+      when: ansible_distribution_release == "bullseye"
+
     - name: "Install ucarp"
       package:
-        name: ["ucarp", "iputils-arping"]
+        name: "ucarp"
+        state: present
+      when: ansible_distribution_release == "buster"
+
+    - name: "Install iputils-arping"
+      package:
+        name: "iputils-arping"
         state: present
 
     - name: "Create config directory"

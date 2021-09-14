@@ -19,3 +19,7 @@ ucarp_config:
 #ucarp_down_options.elasticsearch: |
 #  some action
 #  some more
+
+#for debian-11
+ucarp_deb_pkgs:
+  - http://ftp.fr.debian.org/debian/pool/main/u/ucarp/ucarp_1.5.2-2.2_amd64.deb
