@@ -1,6 +1,6 @@
 ---
 - name: "restart ucarp"
-  systemd:
+  ansible.builtin.service:
     name: "ucarp-{{ item.name }}"
     daemon_reload: true
     state: restarted

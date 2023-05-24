@@ -1,35 +1,36 @@
 ---
 - name: "Check for ucarp binary"
-  stat:
+  ansible.builtin.stat:
     path: "/usr/sbin/ucarp"
   changed_when: false
   register: ucarp_binary
 
-- when: not ucarp_binary.stat.exists
+- name: "Install tasks"
+  when: not ucarp_binary.stat.exists
   block:
     # Special taks for debian-11
     - include_tasks: setup-Debian-11.yml
       when: ansible_distribution_release == "bullseye"
 
     - name: "Install ucarp"
-      package:
+      ansible.builtin.package:
         name: "ucarp"
         state: present
-      when: ansible_distribution_release == "buster"
+      when: ansible_distribution_release != "bulleyes"
 
-    - name: "Install iputils-arping"
-      package:
-        name: "iputils-arping"
+    - name: "Install net packages"
+      ansible.builtin.package:
+        name: "{{ ucarp_pkgs }}"
         state: present
 
     - name: "Create config directory"
-      file:
+      ansible.builtin.file:
         path: /etc/ucarp/
         state: directory
         mode: '0755'
 
 - name: "Create init file for ucarp"
-  template:
+  ansible.builtin.template:
     src: "ucarp.service.j2"
     dest: "/etc/systemd/system/ucarp-{{ item.name }}.service"
     mode: '0644'
@@ -40,7 +41,7 @@
     - "restart ucarp"
 
 - name: "Copy up scripts"
-  template:
+  ansible.builtin.template:
     src: "vip-up.sh.j2"
     dest: "/etc/ucarp/{{ item.name }}-up.sh"
     mode: '0755'
@@ -51,7 +52,7 @@
     - restart ucarp
 
 - name: "Copy down scripts"
-  template:
+  ansible.builtin.template:
     src: "vip-down.sh.j2"
     dest: "/etc/ucarp/{{ item.name }}-down.sh"
     mode: '0755'
@@ -62,7 +63,7 @@
     - restart ucarp
 
 - name: "Enable ucarp service"
-  service:
+  ansible.builtin.service:
     name: "ucarp-{{ item.name }}"
     enabled: true
     state: started
@@ -71,7 +72,7 @@
     - "{{ ucarp_config }}"
 
 - name: "Remember which services need to restart"
-  set_fact:
+  ansible.builtin.set_fact:
     restart_services: "{{ restart_services | default([]) + [item.item.name] }}"
   no_log: true
   when: item.changed

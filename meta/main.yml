@@ -1,24 +1,29 @@
 ---
 galaxy_info:
-  author: "Philippe leal"
-  description: "Install and configure ucarp"
+  author: lotusnoir
   role_name: apps_ucarp
-  license: "license: Apache License, Version 2.0"
+  description: "Install and configure ucarp."
+  license: "Apache License, Version 2.0"
   min_ansible_version: 2.8
 
   platforms:
     - name: "Ubuntu"
       versions:
-        - "xenial"
+        - "focal"
         - "bionic"
+        - "jammy"
     - name: "Debian"
       versions:
-        - "bullseye"
         - "buster"
-        - "stretch"
+        - "bullseye"
+    - name: "OracleLinux"
+      versions:
+        - "8"
+        - "9"
 
   galaxy_tags:
     - lb
+    - failover
     - ucarp
     - vip
 

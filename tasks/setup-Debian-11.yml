@@ -1,6 +1,6 @@
 ---
 - name: Install ucarp from deb
-  apt:
+  ansible.builtin.apt:
     deb: "{{ item }}"
   environment:
     PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -8,7 +8,7 @@
     - "{{ ucarp_deb_pkgs }}"
 
 - name: "Ensure configuration directory exists"
-  file:
+  ansible.builtin.file:
     path: '/etc/ucarp'
     state: directory
     mode: '0755'
