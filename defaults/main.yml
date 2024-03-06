@@ -1,19 +1,20 @@
 ---
-ucarp_config:
-  - name: postgresql
-    vip: "10.64.38.201"
-    instance: 1
-    passwd: "ucarppass"
-    interface: "ens3"
-    skew: 50
-    master: true
-  - name: elasticsearch
-    vip: "10.64.38.202"
-    instance: 2
-    passwd: "strongpassagain"
-    interface: "ens3"
-    skew: 50
-    master: true
+ucarp_nolog: true
+ucarp_config: {}
+#  - name: postgresql
+#    vip: "10.64.38.201"
+#    instance: 1
+#    passwd: "ucarppass"
+#    interface: "ens3"
+#    skew: 50
+#    master: true
+#  - name: elasticsearch
+#    vip: "10.64.38.202"
+#    instance: 2
+#    passwd: "strongpassagain"
+#    interface: "ens3"
+#    skew: 50
+#    master: true
 #ucarp_up_options.postgresql: |
 #  test
 #ucarp_down_options.elasticsearch: |
