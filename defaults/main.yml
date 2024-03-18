@@ -1,5 +1,5 @@
 ---
-ucarp_nolog: true
+ucarp_nolog: false
 ucarp_config: {}
 #  - name: postgresql
 #    vip: "10.64.38.201"

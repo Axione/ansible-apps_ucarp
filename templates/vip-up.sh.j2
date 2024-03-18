@@ -1,5 +1,8 @@
 #!/bin/sh
-# Required softwares: arping (debian package "iputils-arping") 
+
+{{ ansible_managed | comment }}
+
+# Required softwares: arping (debian package "iputils-arping")
 # and atk6-fake_advertise6 (debian package "thc-ipv6")
 
 IPBIN="/sbin/ip"
@@ -25,7 +28,7 @@ do
     ${ARPPINGBIN} -I ${iface} -c 10 -q -U ${VIPv4} 1>/dev/null &
 done
 
-{% if hostvars[inventory_hostname]['ucarp_up_options.' + item.name]  is defined %} 
+{% if hostvars[inventory_hostname]['ucarp_up_options.' + item.name]  is defined %}
     {{ hostvars[inventory_hostname]['ucarp_up_options.' + item.name]|indent(4, False) }}
 {% endif %}
 

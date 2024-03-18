@@ -1,5 +1,5 @@
 ---
-- name: "restart ucarp"
+- name: "Restart ucarp"
   ansible.builtin.service:
     name: "ucarp-{{ item.name }}"
     daemon_reload: true

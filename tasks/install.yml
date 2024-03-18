@@ -9,7 +9,8 @@
   when: not ucarp_binary.stat.exists
   block:
     # Special taks for debian-11
-    - include_tasks: setup-Debian-11.yml
+    - name: Debian 11 fix
+      ansible.builtin.include_tasks: setup-Debian-11.yml
       when: ansible_distribution_release == "bullseye"
 
     - name: "Install ucarp"
@@ -42,7 +43,7 @@
       with_items:
         - "{{ ucarp_config }}"
       notify:
-        - "restart ucarp"
+        - "Restart ucarp"
 
     - name: "Copy up scripts"
       ansible.builtin.template:
@@ -54,7 +55,7 @@
       with_items:
         - "{{ ucarp_config }}"
       notify:
-        - restart ucarp
+        - "Restart ucarp"
 
     - name: "Copy down scripts"
       ansible.builtin.template:
@@ -66,7 +67,7 @@
       with_items:
         - "{{ ucarp_config }}"
       notify:
-        - restart ucarp
+        - "Restart ucarp"
 
     - name: "Enable ucarp service"
       ansible.builtin.service:
