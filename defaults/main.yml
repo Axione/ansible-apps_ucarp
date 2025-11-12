@@ -15,12 +15,12 @@ ucarp_config: {}
 #    interface: "ens3"
 #    skew: 50
 #    master: true
-#ucarp_up_options.postgresql: |
-#  test
-#ucarp_down_options.elasticsearch: |
-#  some action
-#  some more
+# ucarp_up_options.postgresql: |
+#   test
+# ucarp_down_options.elasticsearch: |
+#   some action
+#   some more
 
-#for debian-11
+# for debian-11
 ucarp_deb_pkgs:
-  - http://ftp.fr.debian.org/debian/pool/main/u/ucarp/ucarp_1.5.2-2.2_amd64.deb
+  - https://snapshot.debian.org/archive/debian/20220518T205326Z/pool/main/u/ucarp/ucarp_1.5.2-3_amd64.deb

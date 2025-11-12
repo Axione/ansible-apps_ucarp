@@ -6,7 +6,7 @@ driver:
   name: docker
 
 scenario:
-  name: default
+  name: debian13
   test_sequence:
     - cleanup
     - destroy
@@ -20,8 +20,8 @@ scenario:
     - destroy
 
 platforms:
-  - name: apps-ucarp-${MOLECULE_DISTRIB:-debian12}
-    image: lotusnoir/ansible_molecule_test_images:${MOLECULE_DISTRIB:-debian12}
+  - name: apps-ucarp-debian13
+    image: lotusnoir/ansible_molecule_test_images:debian13
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     cgroupns_mode: host
     pre_build_image: true
