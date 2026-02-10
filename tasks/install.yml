@@ -11,13 +11,13 @@
     # Special taks for debian-11
     - name: Debian 11 fix
       ansible.builtin.include_tasks: setup-Debian-11.yml
-      when: ansible_distribution_release == "bullseye"
+      when: ansible_facts.distribution_release == "bullseye"
 
     - name: "Install ucarp"
       ansible.builtin.package:
         name: "ucarp"
         state: present
-      when: ansible_distribution_release != "bulleyes"
+      when: ansible_facts.distribution_release != "bulleyes"
 
     - name: "Install net packages"
       ansible.builtin.package:
